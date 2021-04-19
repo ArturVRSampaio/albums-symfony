@@ -5,12 +5,33 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Livros do clube do livro</title>
+    <title>Albums que eu gosto</title>
     <style>
+    
+        body{
+            color: purple;
+            text-align: center;
+            background-color: black;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+
+            text-shadow: 1px 0 0 white, 
+            -1px 0 0 purple, 
+            0 1px 0 purple,
+            0 -1px 0 purple, 
+            1px 1px purple, 
+            -1px -1px 0 purple, 
+            1px -1px 0 purple, 
+            -1px 1px 0 purple;
+        }
         form, table {
-            width: 50%;
+            width: 30%;
             margin: auto;
-            border: 1px solid #ccc;
+            
+            border-top: 9px double purple;
+            border-right: 5px double purple;
+            border-bottom: 9px double white;
+            border-left: 5px double gray;
+            
             padding: 50px;
             box-sizing: border-box;
             border-radius: 10px;
@@ -38,40 +59,55 @@
             background: #333;
             color: #fff;
         }
+        table{
+            border-collapse: collapse;
+        }
+        table, th, td {
+          border: 3px solid white;
+        }
     </style>
 </head>
 <body>
     <form>
+
+        <img src="https://old.officialpsds.com/thumbs/Purple-Skulls-psd72013.png" alt="yeah">
+
         <div>
-            <label>Nome do livro</label>
-            <input type="text" />
+            <label>Nome do album</label>
+            <input type="text"/>
         </div>
         <div>
-            <label>Quantidade de páginas</label>
+            <label>Banda</label>
+            <input type="text"/>
+        </div>
+        <div>
+            <label>Quantidade de Musicas</label>
             <input type="number" />
         </div>
         <div>
-            <label>Valor</label>
-            <input type="text" />
+            <label>Tempo Total</label>
+            <input type="number"/>
         </div>
         <div>
-            <input type="submit" value="Cadastrar"/>
+            <input type="submit" value="Salvar"/>
         </div>
     </form>
     <table>
         <thead>
             <tr>
-                <th>Nome do livro</th>
-                <th>Quantidade de páginas</th>
-                <th>Valor</th>
+                <th>Nome do Album</th>
+                <th>Banda</th>
+                <th>Quantidade de Musicas</th>
+                <th>Ttempo Total</th>
             </tr>
         </thead>
         <tbody>
-            {% for livro in livros %}
+            {% for Album in listaAlbum %}
             <tr>
-                <td>{{ livro.nome }}</td>
-                <td>{{livro.qtdPaginas}}</td>
-                <td>R$ {{livro.valor}}</td>
+                <td>{{ Album.nome }}</td>
+                <td>{{ Album.banda }}</td>
+                <td>{{ Album.qtdMusicas }}</td>
+                <td>{{ Album.tempoTotal }}</td>
             </tr>
             {% endfor %}
         </tbody>
