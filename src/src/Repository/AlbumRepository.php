@@ -18,6 +18,7 @@ class AlbumRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         $em->beginTransaction();
         $em->persist($album);
+        $em->commit();  
         $em->flush();  
     }
 }
