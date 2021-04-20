@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Albums que eu gosto</title>
+    <title>Good albums database</title>
     <style>
     
         body{
@@ -65,49 +65,63 @@
         table, th, td {
           border: 3px solid white;
         }
+
+        td > img {
+            border: 3px solid purple;
+            height: 100px;
+        }
+        
     </style>
 </head>
 <body>
     <form>
 
+        <h1>Good Albums Database</h1>
+
         <img src="https://old.officialpsds.com/thumbs/Purple-Skulls-psd72013.png" alt="yeah">
 
         <div>
-            <label>Nome do album</label>
+            <label>Album cover url</label>
             <input type="text"/>
         </div>
         <div>
-            <label>Banda</label>
+            <label>Album name</label>
             <input type="text"/>
         </div>
         <div>
-            <label>Quantidade de Musicas</label>
+            <label>Band</label>
+            <input type="text"/>
+        </div>
+        <div>
+            <label>Amont of musics</label>
             <input type="number" />
         </div>
         <div>
-            <label>Tempo Total</label>
+            <label>Play Time</label>
             <input type="number"/>
         </div>
         <div>
-            <input type="submit" value="Salvar"/>
+            <input type="submit" value="submit"/>
         </div>
     </form>
     <table>
         <thead>
             <tr>
-                <th>Nome do Album</th>
-                <th>Banda</th>
-                <th>Quantidade de Musicas</th>
-                <th>Ttempo Total</th>
+                <th>Album Cover</th>
+                <th>Album Name</th>
+                <th>Band</th>
+                <th>Amont of musics</th>
+                <th>PlayTime</th>
             </tr>
         </thead>
         <tbody>
             {% for Album in listaAlbum %}
             <tr>
-                <td>{{ Album.nome }}</td>
-                <td>{{ Album.banda }}</td>
-                <td>{{ Album.qtdMusicas }}</td>
-                <td>{{ Album.tempoTotal }}</td>
+                <td> <img src= "{{ Album.imgUrl }}"></td>
+                <td>{{ Album.name }}</td>
+                <td>{{ Album.band }}</td>
+                <td>{{ Album.qtdMusics }}</td>
+                <td>{{ Album.playTime }}</td>
             </tr>
             {% endfor %}
         </tbody>

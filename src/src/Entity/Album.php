@@ -22,12 +22,29 @@ class Album
     {
         $this->band = $band;
         $this->name = $name;
-        $this->name = $imgUrl;
+        $this->imgUrl = $imgUrl;
         $this->qtdMusics = $qtdMusics;
         $this->playTime = $playTime;
     }
 
     
+     
+	/**
+     * @return string
+     */
+    public function getimUrl(): string
+    {
+        return $this->imUrl;
+    }
+
+    /**
+     * @param string $band
+     */
+    public function setimUrl(string $imUrl): void
+    {
+        $this->imUrl = $imUrl;
+    }
+
 	/**
      * @return string
      */
@@ -47,7 +64,7 @@ class Album
 	/**
      * @return string
      */
-    public function getNome(): string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -55,7 +72,7 @@ class Album
     /**
      * @param string $name
      */
-    public function setNome(string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
