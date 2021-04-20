@@ -36,6 +36,8 @@ class AlbumController extends AbstractController
 
         $albumRepository->save($album);
 
+        $this->addFlash("message", "a new album has been delivered to my collection");
+
         return $this->redirectToRoute("Album");
     }
 

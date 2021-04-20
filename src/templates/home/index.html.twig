@@ -74,6 +74,12 @@
     </style>
 </head>
 <body>
+    {% for message in app.flashes('notice') $}
+    <h2 class = "flash-notice">
+        {{ message }}
+    </h2>
+    {% endfor %}
+
     <form action="/adicionar" method="post">
 
         <h1>Good Albums Database</h1>
