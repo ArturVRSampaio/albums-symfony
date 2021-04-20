@@ -24,7 +24,7 @@ class AlbumController extends AbstractController
     }
 
     /**
-     * @Route("/adicionar", name="adicionar")
+     * @Route("/add", name="adicionar")
      */
     public function adicionar(Request $request, AlbumRepository $albumRepository){
         $name = $request->get('name');
