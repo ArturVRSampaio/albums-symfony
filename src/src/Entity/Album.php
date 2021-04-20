@@ -1,13 +1,27 @@
 <?php
-
-
 namespace App\Entity;
-
-
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="Album")
+ */
 class Album
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    private string $id;
+    /** @ORM\Column(type="string") */
+    private string $band;
+    /** @ORM\Column(type="string") */
     private string $name;
+    /** @ORM\Column(type="string") */
+    private string $imgUrl;
+    /** @ORM\Column(type="integer") */
     private int $qtdMusics;
+    /** @ORM\Column(type="integer") */
     private float $playTime;
 
     /**
@@ -32,23 +46,39 @@ class Album
 	/**
      * @return string
      */
-    public function getimUrl(): string
+    public function getId(): string
     {
-        return $this->imUrl;
+        return $this->id;
     }
 
     /**
      * @param string $band
      */
-    public function setimUrl(string $imUrl): void
+    public function setID(string $id): void
     {
-        $this->imUrl = $imUrl;
+        $this->i = $id;
+    }
+     
+	/**
+     * @return string
+     */
+    public function getImgUrl(): string
+    {
+        return $this->imgUrl;
+    }
+
+    /**
+     * @param string $band
+     */
+    public function setImgUrl(string $imgUrl): void
+    {
+        $this->imgUrl = $imgUrl;
     }
 
 	/**
      * @return string
      */
-    public function getband(): string
+    public function getBand(): string
     {
         return $this->band;
     }
@@ -56,7 +86,7 @@ class Album
     /**
      * @param string $band
      */
-    public function setband(string $band): void
+    public function setBand(string $band): void
     {
         $this->band = $band;
     }
@@ -96,7 +126,7 @@ class Album
     /**
      * @return float
      */
-    public function getplayTime(): float
+    public function getPlayTime(): float
     {
         return $this->playTime;
     }
@@ -104,7 +134,7 @@ class Album
     /**
      * @param float $playTime
      */
-    public function setplayTime(float $playTime): void
+    public function setPlayTime(float $playTime): void
     {
         $this->playTime = $playTime;
     }
