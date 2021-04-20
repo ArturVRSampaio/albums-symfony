@@ -6,39 +6,42 @@ namespace App\Entity;
 
 class Album
 {
-    private string $nome;
-    private int $qtdMusicas;
-    private float $tempoTotal;
+    private string $name;
+    private int $qtdMusics;
+    private float $playTime;
 
     /**
      * Livro constructor.
-     * @param string $nome
-     * @param int $qtdMusicas
-     * @param float $tempoTotal
+     * @param string $band
+     * @param string $name
+     * @param string $imgUrl
+     * @param int $qtdMusics
+     * @param float $playTime
      */
-    public function __construct(string $banda, string $nome, int $qtdMusicas, int $tempoTotal)
+    public function __construct(string $band, string $name, string $imgUrl, int $qtdMusics, int $playTime)
     {
-        $this->banda = $banda;
-        $this->nome = $nome;
-        $this->qtdMusicas = $qtdMusicas;
-        $this->tempoTotal = $tempoTotal;
+        $this->band = $band;
+        $this->name = $name;
+        $this->name = $imgUrl;
+        $this->qtdMusics = $qtdMusics;
+        $this->playTime = $playTime;
     }
 
     
 	/**
      * @return string
      */
-    public function getBanda(): string
+    public function getband(): string
     {
-        return $this->banda;
+        return $this->band;
     }
 
     /**
-     * @param string $banda
+     * @param string $band
      */
-    public function setBanda(string $banda): void
+    public function setband(string $band): void
     {
-        $this->banda = $banda;
+        $this->band = $band;
     }
 
 	/**
@@ -46,47 +49,47 @@ class Album
      */
     public function getNome(): string
     {
-        return $this->nome;
+        return $this->name;
     }
 
     /**
-     * @param string $nome
+     * @param string $name
      */
-    public function setNome(string $nome): void
+    public function setNome(string $name): void
     {
-        $this->nome = $nome;
+        $this->name = $name;
     }
 
     /**
      * @return int
      */
-    public function getQtdMusicas(): int
+    public function getQtdMusics(): int
     {
-        return $this->qtdMusicas;
+        return $this->qtdMusics;
     }
 
     /**
-     * @param int $qtdMusicas
+     * @param int $qtdMusics
      */
-    public function setQtdMusicas(int $qtdMusicas): void
+    public function setQtdMusics(int $qtdMusics): void
     {
-        $this->qtdMusicas = $qtdMusicas;
+        $this->qtdMusics = $qtdMusics;
     }
 
     /**
      * @return float
      */
-    public function gettempoTotal(): float
+    public function getplayTime(): float
     {
-        return $this->tempoTotal;
+        return $this->playTime;
     }
 
     /**
-     * @param float $tempoTotal
+     * @param float $playTime
      */
-    public function settempoTotal(float $tempoTotal): void
+    public function setplayTime(float $playTime): void
     {
-        $this->tempoTotal = $tempoTotal;
+        $this->playTime = $playTime;
     }
 
 
