@@ -1,8 +1,10 @@
 <?php
 namespace App\Entity;
+use App\Repository\AlbumRepository; 
 use Doctrine\ORM\Mapping as ORM;
+
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=AlbumRepository::class)
  * @ORM\Table(name="Album")
  */
 class Album
@@ -25,7 +27,7 @@ class Album
     private float $playTime;
 
     /**
-     * Livro constructor.
+     * Album constructor.
      * @param string $band
      * @param string $name
      * @param string $imgUrl
@@ -52,7 +54,7 @@ class Album
     }
 
     /**
-     * @param string $band
+     * @param string $id
      */
     public function setID(string $id): void
     {
@@ -68,7 +70,7 @@ class Album
     }
 
     /**
-     * @param string $band
+     * @param string $imgUrl
      */
     public function setImgUrl(string $imgUrl): void
     {
