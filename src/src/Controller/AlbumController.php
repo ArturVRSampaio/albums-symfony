@@ -64,8 +64,7 @@ class AlbumController extends AbstractController
     {
         if(!$this->validateImput($request)){
             $this->addFlash("message", "request fail");
-            $response = new Response('invalid syntax', Response::HTTP_BAD_REQUEST);
-            $response->send();
+            return $this->redirectToRoute("Album");
         }
         
 
