@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Album;
+use App\Validator\AlbumValidator;
 use App\Repository\AlbumRepository;
+use Exception;
 use PhpParser\Node\Expr\Cast\Bool_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AlbumController extends AbstractController
 {
+
+    private AlbumValidator $validador;
+    public function __construct()
+    {
+        $this->validador = new AlbumValidator();
+    }
     /**
      * @Route("/", name="Album")
      */
@@ -28,10 +36,8 @@ class AlbumController extends AbstractController
      * @Route("/add", name="adicionar")
      */
     public function adicionar(Request $request, AlbumRepository $albumRepository){
-        if(!$this->validateImput($request)){
-            $this->addFlash("message", "request fail");
-            return $this->redirectToRoute("Album");
-        }
+        try{
+        $this->validador->validateImput($request);
         
         $name = $request->get('name');
         $band = $request->get('band');
@@ -45,6 +51,12 @@ class AlbumController extends AbstractController
         $this->addFlash("message", "a new album has been delivered to my collection");
 
         return $this->redirectToRoute("Album");
+        }
+        catch(Exception $e){
+            $this->addFlash("message", $e->getMessage());
+            return $this->redirectToRoute("Album");
+        }
+    
     }
 
     /**
@@ -62,10 +74,9 @@ class AlbumController extends AbstractController
      */
     public function saveEdit(Request $request, Album $album, AlbumRepository $albumRepository): Response
     {
-        if(!$this->validateImput($request)){
-            $this->addFlash("message", "request fail");
-            return $this->redirectToRoute("Album");
-        }
+        $this->validador->validateImput($request);
+            //$this->addFlash("message", "request fail");
+            //return $this->redirectToRoute("Album");
         
 
             $name = $request->get('name');
@@ -96,22 +107,6 @@ class AlbumController extends AbstractController
         $this->addFlash("message", "Album removed with success");
 
         return $this->redirectToRoute("home");
-    }
-
-    private function validateImput(Request $request): bool
-    {
-        $name = $request->get('name');
-        $band = $request->get('band');
-        $imgUrl = $request->get('imgUrl');
-        $qtdMusics = $request->get('qtdMusics');
-        $playTime = $request->get('playTime');
-
-        if($name == null or $band == null or $imgUrl == null or $qtdMusics == null or $playTime ==null){
-            return false;
-        }
-
-        return true;
-
     }
 
 }

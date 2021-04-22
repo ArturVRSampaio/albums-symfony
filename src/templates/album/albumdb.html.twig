@@ -74,7 +74,7 @@
     </style>
 </head>
 <body>
-    {% for message in app.flashes('notice') %}
+    {% for message in app.flashes('message') %}
     <h2 class = "flash-notice">
         {{ message }}
     </h2>
