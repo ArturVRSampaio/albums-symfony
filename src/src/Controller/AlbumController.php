@@ -28,7 +28,10 @@ class AlbumController extends AbstractController
      * @Route("/add", name="adicionar")
      */
     public function adicionar(Request $request, AlbumRepository $albumRepository){
-        if($this->validateImput($request)){
+        if(!$this->validateImput($request)){
+            $this->addFlash("message", "request fail");
+            return $this->redirectToRoute("Album");
+        }
         
         $name = $request->get('name');
         $band = $request->get('band');
@@ -42,11 +45,6 @@ class AlbumController extends AbstractController
         $this->addFlash("message", "a new album has been delivered to my collection");
 
         return $this->redirectToRoute("Album");
-        }
-        else{
-            $this->addFlash("message", "request fail");
-            return $this->redirectToRoute("Album");
-        }
     }
 
     /**
@@ -64,7 +62,12 @@ class AlbumController extends AbstractController
      */
     public function saveEdit(Request $request, Album $album, AlbumRepository $albumRepository): Response
     {
-        if($this->validateImput($request)){
+        if(!$this->validateImput($request)){
+            $this->addFlash("message", "request fail");
+            $response = new Response('invalid syntax', Response::HTTP_BAD_REQUEST);
+            $response->send();
+        }
+        
 
             $name = $request->get('name');
             $band = $request->get('band');
@@ -83,11 +86,6 @@ class AlbumController extends AbstractController
             $this->addFlash("message", "Album added with success");
 
             return $this->redirectToRoute("home");
-        }
-        else{
-            $this->addFlash("message", "request fail");
-            return $this->redirectToRoute("Album");
-        }
     }
 
     /**
