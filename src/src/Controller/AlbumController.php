@@ -101,7 +101,7 @@ class AlbumController extends AbstractController
         return $this->redirectToRoute("home");
     }
 
-    public function validateImput(Request $request): bool
+    private function validateImput(Request $request): bool
     {
         $name = $request->get('name');
         $band = $request->get('band');
