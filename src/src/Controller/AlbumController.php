@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Album;
 use App\Repository\AlbumRepository;
+use PhpParser\Node\Expr\Cast\Bool_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,8 @@ class AlbumController extends AbstractController
      * @Route("/add", name="adicionar")
      */
     public function adicionar(Request $request, AlbumRepository $albumRepository){
+        if($this->validateImput($request)){
+        
         $name = $request->get('name');
         $band = $request->get('band');
         $imgUrl = $request->get('imgUrl');
@@ -39,6 +42,11 @@ class AlbumController extends AbstractController
         $this->addFlash("message", "a new album has been delivered to my collection");
 
         return $this->redirectToRoute("Album");
+        }
+        else{
+            $this->addFlash("message", "request fail");
+            return $this->redirectToRoute("Album");
+        }
     }
 
     /**
@@ -56,24 +64,30 @@ class AlbumController extends AbstractController
      */
     public function saveEdit(Request $request, Album $album, AlbumRepository $albumRepository): Response
     {
-        $name = $request->get('name');
-        $band = $request->get('band');
-        $imgUrl = $request->get('imgUrl');
-        $qtdMusics = $request->get('qtdMusics');
-        $playTime = $request->get('playTime');
+        if($this->validateImput($request)){
 
-        $album->setname($name);
-        $album->setband($band);
-        $album->setimgUrl($imgUrl);
-        $album->setqtdMusics($qtdMusics);
-        $album->setplayTime($playTime);
+            $name = $request->get('name');
+            $band = $request->get('band');
+            $imgUrl = $request->get('imgUrl');
+            $qtdMusics = $request->get('qtdMusics');
+            $playTime = $request->get('playTime');
 
-        $albumRepository->save($album);
+            $album->setname($name);
+            $album->setband($band);
+            $album->setimgUrl($imgUrl);
+            $album->setqtdMusics($qtdMusics);
+            $album->setplayTime($playTime);
 
-        $this->addFlash("message", "Album added with success");
+            $albumRepository->save($album);
 
-        return $this->redirectToRoute("home");
+            $this->addFlash("message", "Album added with success");
 
+            return $this->redirectToRoute("home");
+        }
+        else{
+            $this->addFlash("message", "request fail");
+            return $this->redirectToRoute("Album");
+        }
     }
 
     /**
@@ -85,6 +99,22 @@ class AlbumController extends AbstractController
         $this->addFlash("message", "Album removed with success");
 
         return $this->redirectToRoute("home");
+    }
+
+    public function validateImput(Request $request): bool
+    {
+        $name = $request->get('name');
+        $band = $request->get('band');
+        $imgUrl = $request->get('imgUrl');
+        $qtdMusics = $request->get('qtdMusics');
+        $playTime = $request->get('playTime');
+
+        if($name == null or $band == null or $imgUrl == null or $qtdMusics == null or $playTime ==null){
+            return false;
+        }
+
+        return true;
+
     }
 
 }
