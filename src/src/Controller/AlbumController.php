@@ -18,7 +18,7 @@ class AlbumController extends AbstractController
     {
         $listAlbum = $albumRepository->findAll();
         
-        return $this->render('home/index.html.twig', [
+        return $this->render('album/albumdb.html.twig', [
             "listAlbum" => $listAlbum
         ]);
     }
@@ -39,6 +39,52 @@ class AlbumController extends AbstractController
         $this->addFlash("message", "a new album has been delivered to my collection");
 
         return $this->redirectToRoute("Album");
+    }
+
+    /**
+     * @Route("/edit/{id}", name="edit")
+     */
+    public function edit(Album $album): Response
+    {
+        return $this->render('album/editAlbum.html.twig', [
+            "album" => $album
+        ]);
+    }
+
+    /**
+     * @Route("/edit/save/{id}", name="edit_save")
+     */
+    public function saveEdit(Request $request, Album $album, AlbumRepository $albumRepository): Response
+    {
+        $name = $request->get('name');
+        $band = $request->get('band');
+        $imgUrl = $request->get('imgUrl');
+        $qtdMusics = $request->get('qtdMusics');
+        $playTime = $request->get('playTime');
+
+        $album->setname($name);
+        $album->setband($band);
+        $album->setimgUrl($imgUrl);
+        $album->setqtdMusics($qtdMusics);
+        $album->setplayTime($playTime);
+
+        $albumRepository->save($album);
+
+        $this->addFlash("message", "Album added with success");
+
+        return $this->redirectToRoute("home");
+
+    }
+
+    /**
+     * @Route("/remove/{id}", name="remove")
+     */
+    public function remove(Album $album, AlbumRepository $albumRepository): Response
+    {
+        $albumRepository->remove($album);
+        $this->addFlash("message", "Album removed with success");
+
+        return $this->redirectToRoute("home");
     }
 
 }

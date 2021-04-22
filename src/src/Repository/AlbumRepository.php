@@ -21,4 +21,13 @@ class AlbumRepository extends ServiceEntityRepository
         $em->commit();  
         $em->flush();  
     }
+
+    public function remove(Album $album)
+    {
+        $em = $this->getEntityManager();
+        $em->beginTransaction();
+        $em->remove($album);
+        $em->commit();
+        $em->flush();
+    }
 }

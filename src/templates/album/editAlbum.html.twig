@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Good albums database</title>
+    <style>
+        body{
+            color: purple;
+            text-align: center;
+            background-color: black;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+
+            text-shadow: 1px 0 0 white, 
+            -1px 0 0 purple, 
+            0 1px 0 purple,
+            0 -1px 0 purple, 
+            1px 1px purple, 
+            -1px -1px 0 purple, 
+            1px -1px 0 purple, 
+            -1px 1px 0 purple;
+        }
+        form {
+            width: 30%;
+            margin: auto;
+            
+            border-top: 9px double purple;
+            border-right: 5px double purple;
+            border-bottom: 9px double white;
+            border-left: 5px double gray;
+            
+            padding: 50px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        form > div {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+        }
+        form > div > label {
+            font-size: 18pt;
+        }
+        form > div > input {
+            margin-top: 15px;
+            font-size: 18pt;
+            padding: 5px 10px;
+        }
+
+        td > img {
+            border: 3px solid purple;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    {% for message in app.flashes('notice') %}
+    <h2 class = "flash-notice">
+        {{ message }}
+    </h2>
+    {% endfor %}
+
+    <div name = "content" >
+        <h1>Edit a Good Album</h1>
+
+        <img src="https://old.officialpsds.com/thumbs/Purple-Skulls-psd72013.png" alt="yeah">
+
+    <form action="{{ path('edit_save', { 'id' : album.id }) }}" method="post">
+            <div>
+                <label>Album cover url</label>
+                <input type="text" name="imgUrl" value="{{ album.imgUrl }}"/>
+            </div>
+            <div>
+                <label>Album name</label>
+                <input type="text" name="name" value="{{ album.name }}"/>
+            </div>
+            <div>
+                <label>Band</label>
+                <input type="text" name="band" value="{{ album.band }}"/>
+            </div>
+            <div>
+                <label>Amont of musics</label>
+                <input type="number" name="qtdMusics" value="{{ album.qtdMusics }}"/>
+            </div>
+            <div>
+                <label>Play Time</label>
+                <input type="number" name="playTime" value="{{ album.playTime }}"/>
+            </div>
+            <div>
+                <input type="submit" value="edit"/>
+            </div>
+    </form>
+</body>
+</html>
