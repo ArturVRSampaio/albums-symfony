@@ -4,10 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Album;
 use App\Form\AlbumType;
-use App\Validator\AlbumValidator;
 use App\Repository\AlbumRepository;
-use Exception;
-use PhpParser\Node\Expr\Cast\Bool_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
