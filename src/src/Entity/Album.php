@@ -57,8 +57,8 @@ class Album
      * @Assert\NotBlank
      * @Assert\Range(
      *      min = 1,
-     *      max = 100,
-     *      notInRangeMessage = "PlayTime must be between {{ min }}cm and {{ max }}cm tall to enter",
+     *      max = 200,
+     *      notInRangeMessage = "qtdMusics must be between {{ min }} and {{ max }} musics",
      * )
      */
     private int $qtdMusics;
@@ -69,7 +69,7 @@ class Album
      * @Assert\Range(
      *      min = 1,
      *      max = 300,
-     *      notInRangeMessage = "PlayTime must be between {{ min }}cm and {{ max }}cm tall to enter",
+     *      notInRangeMessage = "PlayTime must be between {{ min }} and {{ max }} minutes",
      * )
      */
     private float $playTime;
