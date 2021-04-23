@@ -70,30 +70,11 @@
 
         <img src="https://old.officialpsds.com/thumbs/Purple-Skulls-psd72013.png" alt="yeah">
 
-    <form action="{{ path('edit_save', { 'id' : album.id }) }}" method="post">
-            <div>
-                <label>Album cover url</label>
-                <input type="text" name="imgUrl" value="{{ album.imgUrl }}"/>
-            </div>
-            <div>
-                <label>Album name</label>
-                <input type="text" name="name" value="{{ album.name }}"/>
-            </div>
-            <div>
-                <label>Band</label>
-                <input type="text" name="band" value="{{ album.band }}"/>
-            </div>
-            <div>
-                <label>Amont of musics</label>
-                <input type="number" name="qtdMusics" value="{{ album.qtdMusics }}"/>
-            </div>
-            <div>
-                <label>Play Time</label>
-                <input type="number" name="playTime" value="{{ album.playTime }}"/>
-            </div>
-            <div>
-                <input type="submit" value="edit"/>
-            </div>
-    </form>
+    
+    {{ form_start(formAlbum, {'action': path('edit_save', {'id': album.id })}) }}
+        {{ form_widget(formAlbum) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(formAlbum) }}
+
 </body>
 </html>

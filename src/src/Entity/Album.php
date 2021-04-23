@@ -25,26 +25,7 @@ class Album
     private int $qtdMusics;
     /** @ORM\Column(type="integer") */
     private float $playTime;
-
-    /**
-     * Album constructor.
-     * @param string $band
-     * @param string $name
-     * @param string $imgUrl
-     * @param int $qtdMusics
-     * @param float $playTime
-     */
-    public function __construct(string $band, string $name, string $imgUrl, int $qtdMusics, int $playTime)
-    {
-        $this->band = $band;
-        $this->name = $name;
-        $this->imgUrl = $imgUrl;
-        $this->qtdMusics = $qtdMusics;
-        $this->playTime = $playTime;
-    }
-
-    
-     
+ 
 	/**
      * @return string
      */

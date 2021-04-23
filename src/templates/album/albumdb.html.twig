@@ -85,32 +85,13 @@
 
         <img src="https://old.officialpsds.com/thumbs/Purple-Skulls-psd72013.png" alt="yeah">
 
-        <form name ="crud" action="/add" method="post">
-            <div>
-                <label>Album cover url</label>
-                <input type="text" name="imgUrl"/>
-            </div>
-            <div>
-                <label>Album name</label>
-                <input type="text" name="name"/>
-            </div>
-            <div>
-                <label>Band</label>
-                <input type="text" name="band"/>
-            </div>
-            <div>
-                <label>Amont of musics</label>
-                <input type="number" name="qtdMusics"/>
-            </div>
-            <div>
-                <label>Play Time</label>
-                <input type="number" name="playTime"/>
-            </div>
-            <div>
-                <input type="submit" value="submit"/>
-            </div>
-        </form>
-
+        
+        {{ form_start(formAlbum,{'action': path('add')}) }}
+        {{ form_errors(formAlbum) }}
+        {{ form_widget(formAlbum) }}
+        <input type="submit" value="add" />
+        {{ form_end(formAlbum) }}
+        
     <table>
         <thead>
             <tr>

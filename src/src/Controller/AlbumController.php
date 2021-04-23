@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Album;
+use App\Form\AlbumType;
 use App\Validator\AlbumValidator;
 use App\Repository\AlbumRepository;
 use Exception;
@@ -14,49 +15,36 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AlbumController extends AbstractController
 {
-
-    private AlbumValidator $validador;
-    public function __construct()
-    {
-        $this->validador = new AlbumValidator();
-    }
     /**
-     * @Route("/", name="Album")
+     * @Route("/", name="album")
      */
     public function index(AlbumRepository $albumRepository): Response
     {
         $listAlbum = $albumRepository->findAll();
-        
+        $form = $this->createForm(AlbumType::class);
+
         return $this->render('album/albumdb.html.twig', [
-            "listAlbum" => $listAlbum
+            "listAlbum" => $listAlbum,
+            "formAlbum" => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/add", name="adicionar")
+     * @Route("/add", name="add")
      */
-    public function adicionar(Request $request, AlbumRepository $albumRepository){
-        try{
-        $this->validador->validateImput($request);
+    public function add(Request $request, AlbumRepository $albumRepository){
+
+        $form = $this->createForm(AlbumType::class);
+        $form->handleRequest($request);
+
+        if($form->isValid()) {
+            $album = $form->getData();
+
+            $albumRepository->save($album);
+            $this->addFlash("message", "a new album has been delivered to my collection");
+        }            
         
-        $name = $request->get('name');
-        $band = $request->get('band');
-        $imgUrl = $request->get('imgUrl');
-        $qtdMusics = $request->get('qtdMusics');
-        $playTime = $request->get('playTime');
-        $album = new Album($band, $name, $imgUrl,$qtdMusics, $playTime);
-
-        $albumRepository->save($album);
-
-        $this->addFlash("message", "a new album has been delivered to my collection");
-
-        return $this->redirectToRoute("Album");
-        }
-        catch(Exception $e){
-            $this->addFlash("message", $e->getMessage());
-            return $this->redirectToRoute("Album");
-        }
-    
+        return $this->redirectToRoute("album");
     }
 
     /**
@@ -64,8 +52,10 @@ class AlbumController extends AbstractController
      */
     public function edit(Album $album): Response
     {
+        $form = $this->createForm(AlbumType::class);
         return $this->render('album/editAlbum.html.twig', [
-            "album" => $album
+            "album" => $album,
+            "formAlbum" => $form->createView()
         ]);
     }
 
@@ -74,10 +64,11 @@ class AlbumController extends AbstractController
      */
     public function saveEdit(Request $request, Album $album, AlbumRepository $albumRepository): Response
     {
-        $this->validador->validateImput($request);
-            //$this->addFlash("message", "request fail");
-            //return $this->redirectToRoute("Album");
-        
+        $form = $this->createForm(AlbumType::class);
+        $form->handleRequest($request);
+
+        if($form->isValid()) {
+            $album = $form->getData();
 
             $name = $request->get('name');
             $band = $request->get('band');
@@ -93,9 +84,11 @@ class AlbumController extends AbstractController
 
             $albumRepository->save($album);
 
-            $this->addFlash("message", "Album added with success");
+            $this->addFlash("message", "Edit save with success");
 
-            return $this->redirectToRoute("home");
+        }
+        return $this->redirectToRoute("home");
+        
     }
 
     /**
