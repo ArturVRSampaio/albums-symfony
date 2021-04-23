@@ -2,6 +2,7 @@
 namespace App\Entity;
 use App\Repository\AlbumRepository; 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AlbumRepository::class)
@@ -15,15 +16,62 @@ class Album
      * @ORM\GeneratedValue
      */
     private string $id;
-    /** @ORM\Column(type="string") */
+    /** 
+     * @ORM\Column(type="string") 
+     * 
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "the Band name must be at least {{ limit }} characters long",
+     *      maxMessage = "the Band name cannot be longer than {{ limit }} characters"
+     * )
+     */
     private string $band;
-    /** @ORM\Column(type="string") */
+    /** @ORM\Column(type="string") 
+     * 
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "the name must be at least {{ limit }} characters long",
+     *      maxMessage = "the name cannot be longer than {{ limit }} characters"
+     * )
+    */
     private string $name;
-    /** @ORM\Column(type="string") */
+    /** 
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "the name must be at least {{ limit }} characters long",
+     *      maxMessage = "the name cannot be longer than {{ limit }} characters"
+     * )
+     */
     private string $imgUrl;
-    /** @ORM\Column(type="integer") */
+    /** 
+     * @ORM\Column(type="integer")
+     * 
+     * @Assert\NotBlank
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 100,
+     *      notInRangeMessage = "PlayTime must be between {{ min }}cm and {{ max }}cm tall to enter",
+     * )
+     */
     private int $qtdMusics;
-    /** @ORM\Column(type="integer") */
+    /** 
+     * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 300,
+     *      notInRangeMessage = "PlayTime must be between {{ min }}cm and {{ max }}cm tall to enter",
+     * )
+     */
     private float $playTime;
  
 	/**
