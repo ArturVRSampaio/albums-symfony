@@ -39,9 +39,16 @@ class AlbumController extends AbstractController
 
             $albumRepository->save($album);
             $this->addFlash("message", "a new album has been delivered to my collection");
-        }            
         
+        }else {
+            $listAlbum = $albumRepository->findAll();
+            return $this->render('album/albumdb.html.twig', [
+                "listAlbum" => $listAlbum,
+                "formAlbum" => $form->createView()
+            ]);
+        }
         return $this->redirectToRoute("album");
+        
     }
 
     /**
@@ -82,10 +89,16 @@ class AlbumController extends AbstractController
             $albumRepository->save($album);
 
             $this->addFlash("message", "Edit save with success");
-
-        }
-        return $this->redirectToRoute("home");
         
+        }else {
+            $listAlbum = $albumRepository->findAll();
+            return $this->render('album/editAlbum.html.twig', [
+                "listAlbum" => $listAlbum,
+                "formAlbum" => $form->createView()
+            ]);
+        }
+        return $this->redirectToRoute("album");
+
     }
 
     /**
