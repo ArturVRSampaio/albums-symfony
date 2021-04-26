@@ -19,6 +19,14 @@ class Band
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "the Band name must be at least {{ limit }} characters long",
+     *      maxMessage = "the Band name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 

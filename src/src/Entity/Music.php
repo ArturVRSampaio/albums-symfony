@@ -19,11 +19,27 @@ class Music
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "the Music name must be at least {{ limit }} characters long",
+     *      maxMessage = "the Music name cannot be longer than {{ limit }} characters"
+     * )
+
      */
-    private $Name;
+    private $name;
 
     /**
      * @ORM\Column(type="float")
+     * 
+     * @Assert\NotBlank
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 300,
+     *      notInRangeMessage = "lenght must be between {{ min }} and {{ max }} minutes",
+     * )
      */
     private $lenght;
 
@@ -34,12 +50,12 @@ class Music
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
