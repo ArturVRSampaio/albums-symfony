@@ -33,6 +33,34 @@ class Music
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "the Music urlImg must be at least {{ limit }} characters long",
+     *      maxMessage = "the Music urlImg cannot be longer than {{ limit }} characters"
+     * )
+
+     */
+    private $urlImg;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "the Music urlSong must be at least {{ limit }} characters long",
+     *      maxMessage = "the Music urlSong cannot be longer than {{ limit }} characters"
+     * )
+
+     */
+    private $urlSong;
+
+    /**
      * @ORM\Column(type="float")
      * 
      * @Assert\NotBlank
@@ -43,6 +71,10 @@ class Music
      * )
      */
     private $lenght;
+
+
+    /* ALBUM */
+
 
     public function getId(): ?int
     {
@@ -57,6 +89,30 @@ class Music
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getUrlImg(): ?string
+    {
+        return $this->urlImg;
+    }
+
+    public function setUrlImg(string $urlImg): self
+    {
+        $this->urlImg = $urlImg;
+
+        return $this;
+    }
+
+    public function getUrlSong(): ?string
+    {
+        return $this->urlSong;
+    }
+
+    public function setUrlSong(string $urlSong): self
+    {
+        $this->urlSong = $urlSong;
 
         return $this;
     }

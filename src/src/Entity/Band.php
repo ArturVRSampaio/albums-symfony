@@ -31,6 +31,8 @@ class Band
      */
     private $name;
 
+    /* ALBUNS */
+
     public function getId(): ?int
     {
         return $this->id;

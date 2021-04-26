@@ -74,6 +74,11 @@ class Album
      */
     private float $playTime;
  
+
+
+    /* ALBUM */
+
+
 	/**
      * @return string
      */
